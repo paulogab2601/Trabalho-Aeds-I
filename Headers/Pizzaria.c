@@ -133,11 +133,17 @@ int main()
             }
 
             puts("\n\n\t\t| Pizzas Medias |\n");
+<<<<<<< Updated upstream:Headers/Pizzaria.c
 
             for (int i = 1; i <= id; i++)
             {
                 if (pizza[i].tamanho == 'P')
                 {
+=======
+            
+            for(int i=1; i<=id; i++){
+                if(pizza[i].tamanho == 'M'){
+>>>>>>> Stashed changes:Pizzaria.c
                     printf("\n| %-25s | R$  %.2f |\n", pizza[i].nome, pizza[i].preco);
                     printf(" - ");
 
@@ -150,11 +156,17 @@ int main()
             }
 
             puts("\n\n\t\t| Pizzas Grandes |\n");
+<<<<<<< Updated upstream:Headers/Pizzaria.c
 
             for (int i = 1; i <= id; i++)
             {
                 if (pizza[i].tamanho == 'P')
                 {
+=======
+            
+            for(int i=1; i<=id; i++){
+                if(pizza[i].tamanho == 'G'){
+>>>>>>> Stashed changes:Pizzaria.c
                     printf("\n| %-25s | R$  %.2f |\n", pizza[i].nome, pizza[i].preco);
                     printf(" - ");
 
