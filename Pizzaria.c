@@ -159,8 +159,15 @@ int main(){
 
             puts("\t\t| Pizzas Cadastradas |\n");
             for(int i=1; i<=id; i++){
-                printf("\n[ID %d] | %-25s | R$  %.2f |", i, pizza[i].nome, pizza[i].preco);
+                printf("\n[ID %d] | %-25s | R$  %.2f |\n", i, pizza[i].nome, pizza[i].preco);
+                printf(" - ");
+
+                for(int j=0; j<10; j++){    // Print Ingredientes
+                    if(strlen(pizza[i].ingredientes[j].nome) > 0)
+                         printf("\e[38;5;245m%s, \e[0m", pizza[i].ingredientes[j].nome);
+                }
             }
+            
 
             getchar();
 
