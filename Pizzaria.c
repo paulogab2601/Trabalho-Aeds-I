@@ -31,7 +31,7 @@ typedef struct Pizza{
 
 
 int main(){
-    int op;
+    int op, temp;
 
     int id=0;
 
@@ -103,7 +103,7 @@ int main(){
 
             break;
         
-        case 2:
+        case 2:      // Visualizar Cardapio
 
             clearScreen();
 
@@ -153,7 +153,7 @@ int main(){
 
             break;
         
-        case 3:
+        case 3:     // Editar Cardapio
             
             clearScreen();
 
@@ -164,10 +164,21 @@ int main(){
 
                 for(int j=0; j<10; j++){    // Print Ingredientes
                     if(strlen(pizza[i].ingredientes[j].nome) > 0)
-                         printf("\e[38;5;245m%s, \e[0m", pizza[i].ingredientes[j].nome);
+                        printf("\e[38;5;245m%s, \e[0m", pizza[i].ingredientes[j].nome);
                 }
             }
             
+            puts("Digite o ID da Pizza que deseja alterar: ");
+            scanf("%d", &temp);
+            
+                clearScreen();
+
+                printf("\n[ID %d] | %-25s | R$  %.2f |", temp, pizza[temp].nome, pizza[temp].preco);
+                for(int j=0; j<10; j++){ 
+                    if(strlen(pizza[temp].ingredientes[j].nome) > 0)
+                        printf("\n%s (R$ %.2f)", pizza[temp].ingredientes[j].nome, pizza[temp].ingredientes[j].preco);
+                }
+
 
             getchar();
 
