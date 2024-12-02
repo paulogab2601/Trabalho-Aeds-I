@@ -162,6 +162,8 @@ int main(){
                 printf("\n[ID %d] | %-25s | R$  %.2f |", i, pizza[i].nome, pizza[i].preco);
             }
 
+            getchar();
+
             break;
         
         case 4:
