@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1733188699 source:c:\users\paulo\onedrive\desktop\repositorios\trabalho-aeds-i\pizzaria\ingredientes.c
+	"../head/ingredientes.h"
+
+1733187476 c:\users\paulo\onedrive\desktop\repositorios\trabalho-aeds-i\head\ingredientes.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1733188806 source:c:\users\paulo\onedrive\desktop\repositorios\trabalho-aeds-i\pizzaria\pizza.c
+	"../head/pizza.h"
+
+1733187270 c:\users\paulo\onedrive\desktop\repositorios\trabalho-aeds-i\head\pizza.h
+	"../head/ingredientes.h"
+

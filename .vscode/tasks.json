@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build Projeto",
+        "type": "shell",
+        "command": "gcc",
+        "args": [
+          "main.c",
+          "func/ingredientes.c",
+          "func/pizza.c",
+          "-o",
+          "meu_programa",
+          "-Ihead"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": ["$gcc"],
+        "detail": "Build do projeto principal."
+      }
+    ]
+  }
+  
