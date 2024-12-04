@@ -1,8 +1,8 @@
-#include "header/ingredientes.h"
+#include "ingredientes.h"
 
 
 //Declaração das Variáveis Globais
-int max_ID=0;
+int maxID_Ingred=0;
 
 Ingrediente ingredientes[50];
 
@@ -17,16 +17,16 @@ void newIngrediente(){      //Adiciona Ingrediente
 
     clearScreen();
 
-    max_ID++;
+    maxID_Ingred++;
 
-    ingredientes[max_ID].id = max_ID;
+    ingredientes[maxID_Ingred].id = maxID_Ingred;
 
     puts("\nDigite o nome do novo ingrediente: ");
-    fgets(ingredientes[max_ID].nome, 20, stdin);
-    ingredientes[max_ID].nome[strcspn(ingredientes[max_ID].nome, "\n")] = '\0';
+    fgets(ingredientes[maxID_Ingred].nome, 20, stdin);
+    ingredientes[maxID_Ingred].nome[strcspn(ingredientes[maxID_Ingred].nome, "\n")] = '\0';
 
     puts("\nDigite o preco do novo ingrediente: ");
-    scanf("%f", &ingredientes[max_ID].preco);
+    scanf("%f", &ingredientes[maxID_Ingred].preco);
 
     puts("\nIngrediente cadastrado com sucesso!\n");
 
@@ -35,12 +35,12 @@ void newIngrediente(){      //Adiciona Ingrediente
 
 
 void viewIngrediente(){     //Visualiza Ingredientes Cadastrados
-    
+
     clearScreen();
 
     printf("\t\t| Ingredientes Cadastrados |\n\n");
 
-    for(int i=1; i<=max_ID; i++){
+    for(int i=1; i<=maxID_Ingred; i++){
         if(ingredientes[i].id != 0)
             printf("[%d] %s - R$ %.2f\n", i, ingredientes[i].nome, ingredientes[i].preco);
     }
@@ -59,7 +59,7 @@ void editIngrediente(){     //Edita Ingredientes
 
         printf("\t\t| Editar Ingredientes |\n\n");
 
-        for (int i = 1; i <= max_ID; i++){
+        for (int i = 1; i <= maxID_Ingred; i++){
             if (ingredientes[i].id != 0)
                 printf("[%d] %s - R$ %.2f\n", i, ingredientes[i].nome, ingredientes[i].preco);
         }
@@ -67,7 +67,7 @@ void editIngrediente(){     //Edita Ingredientes
         puts("\nDigite o ID do ingrediente que deseja editar: ");
         scanf("%d", &aux1);
 
-        if(aux1 < 1 || aux1 > max_ID){
+        if(aux1 < 1 || aux1 > maxID_Ingred){
             puts("\nID inexistente.");
             Sleep(1500);
             goto erro1;
@@ -109,7 +109,7 @@ void editIngrediente(){     //Edita Ingredientes
 
 
 void delIngrediente(){      //Deleta Ingredientes
-    
+
     erro:
         clearScreen();
 
@@ -117,7 +117,7 @@ void delIngrediente(){      //Deleta Ingredientes
 
         printf("\t\t| Remover Ingredientes |\n\n");
 
-        for(int i=1; i<=max_ID; i++){
+        for(int i=1; i<=maxID_Ingred; i++){
             if(ingredientes[i].id != 0)
                 printf("[%d] %s - R$ %.2f\n", i, ingredientes[i].nome, ingredientes[i].preco);
         }
@@ -125,7 +125,7 @@ void delIngrediente(){      //Deleta Ingredientes
         puts("\nDigite o ID do ingrediente que deseja remover: ");
         scanf("%d", &aux);
 
-        if(aux < 1 || aux > max_ID){
+        if(aux < 1 || aux > maxID_Ingred){
             puts("\nID inexistente.");
             Sleep(1500);
             goto erro;
