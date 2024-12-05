@@ -7,7 +7,7 @@
 
 typedef struct {
     int id;
-    char nome[50];
+    char nome[100];
     char tamanho; // P, M, G
     float preco;
     Ingrediente ingredientes[MAX_INGREDIENTES_PIZZA];

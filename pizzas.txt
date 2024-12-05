@@ -1,0 +1,6 @@
+1 Frango ao Molho
+ G 120.00 2
+Frango
+ 20.00
+Molho
+ 10.00

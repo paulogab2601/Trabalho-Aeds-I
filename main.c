@@ -3,13 +3,15 @@
 #include "headers/pizza.h"
 #include "headers/ingredientes.h"
 
-int main() {
+int main()
+{
     Pizza pizzas[MAX_PIZZAS];
     Ingrediente ingredientes[MAX_INGREDIENTES];
     int numPizzas = 0, numIngredientes = 0;
-    int opcao;
+    int opcao, subOpcao;
 
-    do {
+    do
+    {
         printf("\n=== Sistema de Gerenciamento de Pizzaria ===\n");
         printf("1. Gerenciar Pizzas\n");
         printf("2. Gerenciar Ingredientes\n");
@@ -22,97 +24,137 @@ int main() {
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
-        switch (opcao) {
-            case 1: // Gerenciar Pizzas
-                do {
-                    printf("\n=== Gerenciar Pizzas ===\n");
-                    printf("1. Adicionar Pizza\n");
-                    printf("2. Visualizar Pizzas\n");
-                    printf("3. Editar Pizza\n");
-                    printf("4. Remover Pizza\n");
-                    printf("0. Voltar\n");
-                    printf("Escolha uma opcao: ");
-                    scanf("%d", &opcao);
+        system("CLS");
 
-                    switch (opcao) {
-                        case 1:
-                            adicionarPizza(pizzas, &numPizzas);
-                            break;
-                        case 2:
-                            visualizarPizzas(pizzas, numPizzas);
-                            break;
-                        case 3:
-                            editarPizza(pizzas, numPizzas);
-                            break;
-                        case 4:
-                            removerPizza(pizzas, &numPizzas);
-                            break;
-                        case 0:
-                            break;
-                        default:
-                            printf("Opcao invalida!\n");
-                    }
-                } while (opcao != 0);
-                break;
+        switch (opcao)
+        {
+        case 1: // Gerenciar Pizzas
+            do
+            {
+                printf("\n=== Gerenciar Pizzas ===\n");
+                printf("1. Adicionar Pizza\n");
+                printf("2. Visualizar Pizzas\n");
+                printf("3. Editar Pizza\n");
+                printf("4. Remover Pizza\n");
+                printf("0. Voltar\n");
+                printf("Escolha uma opcao: ");
+                scanf("%d", &subOpcao);
 
-            case 2: // Gerenciar Ingredientes
-                do {
-                    printf("\n=== Gerenciar Ingredientes ===\n");
-                    printf("1. Adicionar Ingrediente\n");
-                    printf("2. Visualizar Ingredientes\n");
-                    printf("3. Editar Ingrediente\n");
-                    printf("4. Remover Ingrediente\n");
-                    printf("0. Voltar\n");
-                    printf("Escolha uma opcao: ");
-                    scanf("%d", &opcao);
+                switch (subOpcao)
+                {
+                case 1:
+                    system("CLS");
 
-                    switch (opcao) {
-                        case 1:
-                            adicionarIngrediente(ingredientes, &numIngredientes);
-                            break;
-                        case 2:
-                            visualizarIngredientes(ingredientes, numIngredientes);
-                            break;
-                        case 3:
-                            editarIngrediente(ingredientes, numIngredientes);
-                            break;
-                        case 4:
-                            removerIngrediente(ingredientes, &numIngredientes);
-                            break;
-                        case 0:
-                            break;
-                        default:
-                            printf("Opcao invalida!\n");
-                    }
-                } while (opcao != 0);
-                break;
+                    adicionarPizza(pizzas, &numPizzas);
+                    break;
+                    system("CLS");
 
-            case 3: // Vender Pizza
-                printf("Funcionalidade de venda de pizza ainda nao implementada.\n");
-                break;
+                case 2:
+                    visualizarPizzas(pizzas, numPizzas);
+                    break;
+                case 3:
+                    system("CLS");
 
-            case 4: // Exportar Pizzas
-                exportarPizzas(pizzas, numPizzas);
-                break;
+                    editarPizza(pizzas, numPizzas);
+                    break;
+                case 4:
+                    system("CLS");
 
-            case 5: // Importar Pizzas
-                importarPizzas(pizzas, &numPizzas);
-                break;
+                    removerPizza(pizzas, &numPizzas);
+                    break;
+                case 0:
+                    break;
+                default:
+                    system("CLS");
 
-            case 6: // Exportar Ingredientes
-                exportarIngredientes(ingredientes, numIngredientes);
-                break;
+                    printf("Opcao invalida!\n");
+                }
+            } while (subOpcao != 0);
+            break;
 
-            case 7: // Importar Ingredientes
-                importarIngredientes(ingredientes, &numIngredientes);
-                break;
+        case 2: // Gerenciar Ingredientes
+            do
+            {
+                printf("\n=== Gerenciar Ingredientes ===\n");
+                printf("1. Adicionar Ingrediente\n");
+                printf("2. Visualizar Ingredientes\n");
+                printf("3. Editar Ingrediente\n");
+                printf("4. Remover Ingrediente\n");
+                printf("0. Voltar\n");
+                printf("Escolha uma opcao: ");
+                scanf("%d", &subOpcao);
 
-            case 0: // Sair
-                printf("Saindo do sistema...\n");
-                break;
+                switch (subOpcao)
+                {
+                case 1:
+                    system("CLS");
 
-            default:
-                printf("Opcao invalida!\n");
+                    adicionarIngrediente(ingredientes, &numIngredientes);
+                    break;
+                case 2:
+                    system("CLS");
+
+                    visualizarIngredientes(ingredientes, numIngredientes);
+                    break;
+                case 3:
+                    system("CLS");
+
+                    editarIngrediente(ingredientes, numIngredientes);
+                    break;
+                case 4:
+                    system("CLS");
+
+                    removerIngrediente(ingredientes, &numIngredientes);
+                    break;
+                case 0:
+                    break;
+                default:
+                    system("CLS");
+
+                    printf("Opcao invalida!\n");
+                }
+            } while (subOpcao != 0);
+            break;
+
+        case 3: // Vender Pizza
+            system("CLS");
+
+            printf("Funcionalidade de venda de pizza ainda nao implementada.\n");
+            break;
+
+        case 4: // Exportar Pizzas
+            system("CLS");
+
+            exportarPizzas(pizzas, numPizzas);
+            break;
+
+        case 5: // Importar Pizzas
+            system("CLS");
+
+            importarPizzas(pizzas, &numPizzas);
+            break;
+
+        case 6: // Exportar Ingredientes
+            system("CLS");
+
+            exportarIngredientes(ingredientes, numIngredientes);
+            break;
+
+        case 7: // Importar Ingredientes
+            system("CLS");
+
+            importarIngredientes(ingredientes, &numIngredientes);
+            break;
+
+        case 0: // Sair
+            printf("Saindo do sistema...\n");
+            exit(0);
+            break;
+
+        default:
+            system("CLS");
+
+            printf("Opcao invalida!\n");
         }
     } while (opcao != 0);
 
