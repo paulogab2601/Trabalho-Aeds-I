@@ -118,48 +118,55 @@ void removerIngrediente(Ingrediente *ingredientes, int *numIngredientes)
     system("CLS");
 }
 
-// Função para exportar ingredientes para um arquivo
+// Função para exportar ingredientes
 void exportarIngredientes(Ingrediente *ingredientes, int numIngredientes)
 {
     FILE *file = fopen("ingredientes.txt", "w");
     if (file == NULL)
     {
-        printf("Erro ao abrir o arquivo para exportacao.\n");
+        perror("Erro ao abrir o arquivo para exportação");
         return;
     }
+
     for (int i = 0; i < numIngredientes; i++)
     {
-        fprintf(file, "%d %s %.2f\n", ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
+        // Escreve cada ingrediente em uma linha separada, com dados separados por ponto e vírgula
+        fprintf(file, "%d;%s;%.2f\n",
+                ingredientes[i].id,
+                ingredientes[i].nome,
+                ingredientes[i].preco);
     }
+
     fclose(file);
     printf("Ingredientes exportados com sucesso!\n");
-
-    system("PAUSE");
-    system("CLS");
 }
 
-// Função para importar ingredientes de um arquivo
+// Função para importar ingredientes
 void importarIngredientes(Ingrediente *ingredientes, int *numIngredientes)
 {
     FILE *file = fopen("ingredientes.txt", "r");
     if (file == NULL)
     {
-        printf("Erro ao abrir o arquivo para importacao.\n");
+        perror("Erro ao abrir o arquivo para importação");
         return;
     }
 
-    while (*numIngredientes < MAX_INGREDIENTES)
+    char linha[256]; 
+    while (fgets(linha, sizeof(linha), file) && *numIngredientes < MAX_INGREDIENTES)
     {
-        // Lê o ID e o preço do ingrediente
-        if (fscanf(file, "%d %f", &ingredientes[*numIngredientes].id, &ingredientes[*numIngredientes].preco) != 2)
-        {
-            break; // Sai do loop se a leitura falhar
-        }
+        // Divide a linha usando strtok para pegar os dados separados por ponto e vírgula
+        char *token = strtok(linha, ";");
 
-        // Limpa o buffer e lê o nome do ingrediente
-        fgetc(file); // Consome o '\n' que sobrou
-        fgets(ingredientes[*numIngredientes].nome, 100, file);
-        ingredientes[*numIngredientes].nome[strcspn(ingredientes[*numIngredientes].nome, "\n")] = '\0'; // Remove '\n'
+        // Lê o ID do ingrediente
+        ingredientes[*numIngredientes].id = atoi(token);
+
+        // Lê o nome do ingrediente
+        token = strtok(NULL, ";");
+        strcpy(ingredientes[*numIngredientes].nome, token);
+
+        // Lê o preço do ingrediente
+        token = strtok(NULL, ";");
+        ingredientes[*numIngredientes].preco = atof(token);
 
         (*numIngredientes)++;
     }
@@ -174,7 +181,4 @@ void importarIngredientes(Ingrediente *ingredientes, int *numIngredientes)
     {
         printf("Ingredientes importados com sucesso!\n");
     }
-
-    system("PAUSE");
-    system("CLS");
 }

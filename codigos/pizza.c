@@ -66,7 +66,7 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
 
         printf("Preco do ingrediente %d: ", i + 1);
         scanf("%f", &novaPizza.ingredientes[i].preco);
-        novaPizza.ingredientes[i].id = i + 1; // ID auto-incremental para ingredientes
+        novaPizza.ingredientes[i].id = i + 1; // ID incremental
     }
 
     pizzas[*numPizzas] = novaPizza;
@@ -77,7 +77,7 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
     system("CLS");
 }
 
-// Função para visualizar todas as pizzas
+// Função para visualizar as pizzas
 void visualizarPizzas(Pizza *pizzas, int numPizzas)
 {
     if (numPizzas == 0)
@@ -127,6 +127,13 @@ void editarPizza(Pizza *pizzas, int numPizzas)
     getchar();
     fgets(pizza->nome, 100, stdin);
 
+    // Remove o '\n' do final da string, se existir
+    int tamanho = strlen(pizza->nome);
+    if (tamanho > 0 && pizza->nome[tamanho - 1] == '\n')
+    {
+        pizza->nome[tamanho - 1] = '\0';
+    }
+
     do
     {
         printf("Novo tamanho da pizza (atual: %c): ", pizza->tamanho);
@@ -153,6 +160,7 @@ void editarPizza(Pizza *pizzas, int numPizzas)
 
         getchar();
         fgets(pizza->ingredientes[i].nome, 100, stdin);
+        pizza->ingredientes[i].nome[strcspn(pizza->ingredientes[i].nome, "\n")] = '\0';
         printf("Preco do ingrediente %d: ", i + 1);
         scanf("%f", &pizza->ingredientes[i].preco);
         pizza->ingredientes[i].id = i + 1; // ID auto-incremental para ingredientes
@@ -192,63 +200,90 @@ void removerPizza(Pizza *pizzas, int *numPizzas)
     system("CLS");
 }
 
-// Função para exportar pizzas para um arquivo
+// Função para exportar pizza
 void exportarPizzas(Pizza *pizzas, int numPizzas)
 {
     FILE *file = fopen("pizzas.txt", "w");
     if (file == NULL)
     {
-        printf("Erro ao abrir o arquivo para exportacao.\n");
-        system("PAUSE");
-        system("CLS");
-
+        perror("Erro ao abrir o arquivo para exportação");
         return;
     }
+
     for (int i = 0; i < numPizzas; i++)
     {
-        fprintf(file, "%d %s %c %.2f %d\n", pizzas[i].id, pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco, pizzas[i].num_ingredientes);
+        // Exporta os dados da pizza em uma única linha, separados por ponto e vírgula
+        fprintf(file, "%d;%s;%c;%.2f;%d",
+                pizzas[i].id,
+                pizzas[i].nome,
+                pizzas[i].tamanho,
+                pizzas[i].preco,
+                pizzas[i].num_ingredientes);
+
+        // Adiciona os ingredientes na mesma linha
         for (int j = 0; j < pizzas[i].num_ingredientes; j++)
         {
-            fprintf(file, "%s %.2f\n", pizzas[i].ingredientes[j].nome, pizzas[i].ingredientes[j].preco);
+            fprintf(file, ";%s,%.2f",
+                    pizzas[i].ingredientes[j].nome,
+                    pizzas[i].ingredientes[j].preco);
         }
+        fprintf(file, "\n"); // Finaliza a linha para a próxima pizza
     }
+
     fclose(file);
     printf("Pizzas exportadas com sucesso!\n");
-
-    system("PAUSE");
-    system("CLS");
 }
 
-// Função para importar pizzas de um arquivo
+// Função para importar pizza
 void importarPizzas(Pizza *pizzas, int *numPizzas)
 {
     FILE *file = fopen("pizzas.txt", "r");
     if (file == NULL)
     {
-        printf("Erro ao abrir o arquivo para importacao.\n");
-
-        system("PAUSE");
-        system("CLS");
-
+        perror("Erro ao abrir o arquivo para importação");
         return;
     }
-    while (fscanf(file, "%d %s %c %f %d", &pizzas[*numPizzas].id, pizzas[*numPizzas].nome, &pizzas[*numPizzas].tamanho, &pizzas[*numPizzas].preco, &pizzas[*numPizzas].num_ingredientes) != EOF)
+
+    char linha[1024];
+    while (fgets(linha, sizeof(linha), file))
     {
+        // Divide a linha em partes usando strtok
+        char *token = strtok(linha, ";");
+
+        // Lê os dados principais da pizza
+        pizzas[*numPizzas].id = atoi(token);
+        token = strtok(NULL, ";");
+        strcpy(pizzas[*numPizzas].nome, token);
+        token = strtok(NULL, ";");
+        pizzas[*numPizzas].tamanho = token[0];
+        token = strtok(NULL, ";");
+        pizzas[*numPizzas].preco = atof(token);
+        token = strtok(NULL, ";");
+        pizzas[*numPizzas].num_ingredientes = atoi(token);
+
+        // Lê os ingredientes
         for (int j = 0; j < pizzas[*numPizzas].num_ingredientes; j++)
         {
-            fscanf(file, "%s %f", pizzas[*numPizzas].ingredientes[j].nome, &pizzas[*numPizzas].ingredientes[j].preco);
-            pizzas[*numPizzas].ingredientes[j].id = j + 1; // ID auto-incremental para ingredientes
+            token = strtok(NULL, ";");
+            if (token == NULL)
+                break;
+
+            // Divide nome e preço do ingrediente
+            char *subtoken = strtok(token, ",");
+            strcpy(pizzas[*numPizzas].ingredientes[j].nome, subtoken);
+            subtoken = strtok(NULL, ",");
+            pizzas[*numPizzas].ingredientes[j].preco = atof(subtoken);
+            pizzas[*numPizzas].ingredientes[j].id = j + 1;
         }
+
         (*numPizzas)++;
         if (*numPizzas >= MAX_PIZZAS)
         {
-            printf("Limite de pizzas atingido durante a importacao.\n");
+            printf("Limite de pizzas atingido durante a importação.\n");
             break;
         }
     }
+
     fclose(file);
     printf("Pizzas importadas com sucesso!\n");
-
-    system("PAUSE");
-    system("CLS");
 }

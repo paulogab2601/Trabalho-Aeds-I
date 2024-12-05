@@ -8,7 +8,7 @@ int main()
     Pizza pizzas[MAX_PIZZAS];
     Ingrediente ingredientes[MAX_INGREDIENTES];
     int numPizzas = 0, numIngredientes = 0;
-    int opcao, subOpcao;
+    int opcao = 0, subOpcao = 0;
 
     do
     {
@@ -135,7 +135,7 @@ int main()
         case 5: // Importar Pizzas
             system("CLS");
 
-            importarPizzas(pizzas, &numPizzas); // ERRO DE LEITURA - NAO SEI OQ É 
+            importarPizzas(pizzas, &numPizzas); // ERRO DE LEITURA - NAO SEI OQ É
             break;
 
         case 6: // Exportar Ingredientes
@@ -147,7 +147,7 @@ int main()
         case 7: // Importar Ingredientes
             system("CLS");
 
-            importarIngredientes(ingredientes, &numIngredientes); // ERRO DE LEITURA - NAO SEI OQ É 
+            importarIngredientes(ingredientes, &numIngredientes); // ERRO DE LEITURA - NAO SEI OQ É
             break;
 
         case 0: // Sair
