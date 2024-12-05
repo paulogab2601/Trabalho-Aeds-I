@@ -78,6 +78,13 @@ void editarIngrediente(Ingrediente *ingredientes, int numIngredientes)
 
     getchar();
     fgets(ingrediente->nome, 100, stdin);
+
+    int tamanho = strlen(ingrediente->nome); // Só removendo o \n, mais pra formatação mesmo
+    if (tamanho > 0 && ingrediente->nome[tamanho - 1] == '\n')
+    {
+        ingrediente->nome[tamanho - 1] = '\0';
+    }
+
     printf("Novo preco do ingrediente (atual: %.2f): ", ingrediente->preco);
     scanf("%f", &ingrediente->preco);
     printf("Ingrediente editado com sucesso!\n");

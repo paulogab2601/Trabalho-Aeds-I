@@ -123,7 +123,7 @@ int main()
         case 3: // Vender Pizza
             system("CLS");
 
-            printf("Funcionalidade de venda de pizza ainda nao implementada.\n");
+            // Ainda falta implementar
             break;
 
         case 4: // Exportar Pizzas
@@ -135,7 +135,7 @@ int main()
         case 5: // Importar Pizzas
             system("CLS");
 
-            importarPizzas(pizzas, &numPizzas);
+            importarPizzas(pizzas, &numPizzas); // ERRO DE LEITURA - NAO SEI OQ É 
             break;
 
         case 6: // Exportar Ingredientes
@@ -147,7 +147,7 @@ int main()
         case 7: // Importar Ingredientes
             system("CLS");
 
-            importarIngredientes(ingredientes, &numIngredientes);
+            importarIngredientes(ingredientes, &numIngredientes); // ERRO DE LEITURA - NAO SEI OQ É 
             break;
 
         case 0: // Sair

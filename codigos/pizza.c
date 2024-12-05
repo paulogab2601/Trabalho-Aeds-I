@@ -28,8 +28,21 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
         novaPizza.nome[tamanho - 1] = '\0';
     }
 
-    printf("Tamanho (P, M, G): ");
-    scanf(" %c", &novaPizza.tamanho);
+    do
+    {
+        printf("Tamanho (P, M, G): ");
+        scanf(" %c", &novaPizza.tamanho);
+
+        if ((novaPizza.tamanho != 'P') && (novaPizza.tamanho != 'p') && (novaPizza.tamanho != 'M') && (novaPizza.tamanho != 'm') && (novaPizza.tamanho != 'G') && (novaPizza.tamanho != 'g'))
+        {
+            printf("Digite uma opcao valida!\n");
+
+            system("PAUSE");
+            system("CLS");
+        }
+
+    } while ((novaPizza.tamanho != 'P') && (novaPizza.tamanho != 'p') && (novaPizza.tamanho != 'M') && (novaPizza.tamanho != 'm') && (novaPizza.tamanho != 'G') && (novaPizza.tamanho != 'g'));
+
     printf("Preco: ");
     scanf("%f", &novaPizza.preco);
 
@@ -113,8 +126,21 @@ void editarPizza(Pizza *pizzas, int numPizzas)
 
     getchar();
     fgets(pizza->nome, 100, stdin);
-    printf("Novo tamanho da pizza (atual: %c): ", pizza->tamanho);
-    scanf(" %c", &pizza->tamanho);
+
+    do
+    {
+        printf("Novo tamanho da pizza (atual: %c): ", pizza->tamanho);
+        scanf(" %c", &pizza->tamanho);
+        if ((pizza->tamanho != 'P') && (pizza->tamanho != 'p') && (pizza->tamanho != 'M') && (pizza->tamanho != 'm') && (pizza->tamanho != 'G') && (pizza->tamanho != 'g'))
+        {
+            printf("Digite uma opcao valida!\n");
+
+            system("PAUSE");
+            system("CLS");
+        }
+
+    } while ((pizza->tamanho != 'P') && (pizza->tamanho != 'p') && (pizza->tamanho != 'M') && (pizza->tamanho != 'm') && (pizza->tamanho != 'G') && (pizza->tamanho != 'g'));
+
     printf("Novo preco da pizza (atual: %.2f): ", pizza->preco);
     scanf("%f", &pizza->preco);
 
