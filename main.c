@@ -12,7 +12,7 @@ int main()
 
     do
     {
-        printf("\n=== Sistema de Gerenciamento de Pizzaria ===\n");
+        printf("\n=== Sistema de Gerenciamento Pizzaria Joao Fortao ===\n");
         printf("1. Gerenciar Pizzas\n");
         printf("2. Gerenciar Ingredientes\n");
         printf("3. Vender Pizza\n");
@@ -39,6 +39,8 @@ int main()
                 printf("0. Voltar\n");
                 printf("Escolha uma opcao: ");
                 scanf("%d", &subOpcao);
+
+                system("CLS");
 
                 switch (subOpcao)
                 {
@@ -83,6 +85,8 @@ int main()
                 printf("0. Voltar\n");
                 printf("Escolha uma opcao: ");
                 scanf("%d", &subOpcao);
+
+                system("CLS");
 
                 switch (subOpcao)
                 {

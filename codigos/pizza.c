@@ -1,22 +1,33 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #include "../headers/pizza.h"
 
 // Função para adicionar uma pizza
 void adicionarPizza(Pizza *pizzas, int *numPizzas)
 {
-
     if (*numPizzas >= MAX_PIZZAS)
     {
         printf("Limite de pizzas atingido.\n");
+        system("PAUSE");
+        system("CLS");
         return;
     }
     Pizza novaPizza;
     novaPizza.id = *numPizzas + 1; // ID auto-incremental
     printf("Nome da pizza: ");
 
-    getchar();
+    getchar(); // Limpa o buffer de entrada
     fgets(novaPizza.nome, 100, stdin);
+
+    // Remove o '\n' do final da string, se existir
+    int tamanho = strlen(novaPizza.nome);
+    if (tamanho > 0 && novaPizza.nome[tamanho - 1] == '\n')
+    {
+        novaPizza.nome[tamanho - 1] = '\0';
+    }
+
     printf("Tamanho (P, M, G): ");
     scanf(" %c", &novaPizza.tamanho);
     printf("Preco: ");
@@ -30,8 +41,16 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
     for (int i = 0; i < novaPizza.num_ingredientes; i++)
     {
         printf("Nome do ingrediente %d: ", i + 1);
-        getchar();
+        getchar(); // Limpa o buffer de entrada
         fgets(novaPizza.ingredientes[i].nome, 100, stdin);
+
+        // Remove o '\n' do final da string, se existir
+        tamanho = strlen(novaPizza.ingredientes[i].nome);
+        if (tamanho > 0 && novaPizza.ingredientes[i].nome[tamanho - 1] == '\n')
+        {
+            novaPizza.ingredientes[i].nome[tamanho - 1] = '\0';
+        }
+
         printf("Preco do ingrediente %d: ", i + 1);
         scanf("%f", &novaPizza.ingredientes[i].preco);
         novaPizza.ingredientes[i].id = i + 1; // ID auto-incremental para ingredientes
@@ -40,6 +59,9 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
     pizzas[*numPizzas] = novaPizza;
     (*numPizzas)++;
     printf("Pizza adicionada com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para visualizar todas as pizzas
@@ -48,6 +70,10 @@ void visualizarPizzas(Pizza *pizzas, int numPizzas)
     if (numPizzas == 0)
     {
         printf("Nenhuma pizza cadastrada.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
     for (int i = 0; i < numPizzas; i++)
@@ -58,7 +84,11 @@ void visualizarPizzas(Pizza *pizzas, int numPizzas)
         {
             printf("  - %s (%.2f)\n", pizzas[i].ingredientes[j].nome, pizzas[i].ingredientes[j].preco);
         }
+        printf("\n");
     }
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para editar uma pizza
@@ -71,6 +101,10 @@ void editarPizza(Pizza *pizzas, int numPizzas)
     if (id < 1 || id > numPizzas)
     {
         printf("Pizza nao encontrada.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
 
@@ -98,6 +132,9 @@ void editarPizza(Pizza *pizzas, int numPizzas)
         pizza->ingredientes[i].id = i + 1; // ID auto-incremental para ingredientes
     }
     printf("Pizza editada com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para remover uma pizza
@@ -110,6 +147,10 @@ void removerPizza(Pizza *pizzas, int *numPizzas)
     if (id < 1 || id > *numPizzas)
     {
         printf("Pizza nao encontrada.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
 
@@ -120,6 +161,9 @@ void removerPizza(Pizza *pizzas, int *numPizzas)
     }
     (*numPizzas)--; // Decrementa o número de pizzas
     printf("Pizza removida com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para exportar pizzas para um arquivo
@@ -129,6 +173,9 @@ void exportarPizzas(Pizza *pizzas, int numPizzas)
     if (file == NULL)
     {
         printf("Erro ao abrir o arquivo para exportacao.\n");
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
     for (int i = 0; i < numPizzas; i++)
@@ -141,6 +188,9 @@ void exportarPizzas(Pizza *pizzas, int numPizzas)
     }
     fclose(file);
     printf("Pizzas exportadas com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para importar pizzas de um arquivo
@@ -150,6 +200,10 @@ void importarPizzas(Pizza *pizzas, int *numPizzas)
     if (file == NULL)
     {
         printf("Erro ao abrir o arquivo para importacao.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
     while (fscanf(file, "%d %s %c %f %d", &pizzas[*numPizzas].id, pizzas[*numPizzas].nome, &pizzas[*numPizzas].tamanho, &pizzas[*numPizzas].preco, &pizzas[*numPizzas].num_ingredientes) != EOF)
@@ -168,4 +222,7 @@ void importarPizzas(Pizza *pizzas, int *numPizzas)
     }
     fclose(file);
     printf("Pizzas importadas com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }

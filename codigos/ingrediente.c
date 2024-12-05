@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #include "../headers/ingredientes.h"
 
 // Função para adicionar um ingrediente
@@ -8,19 +10,32 @@ void adicionarIngrediente(Ingrediente *ingredientes, int *numIngredientes)
     if (*numIngredientes >= MAX_INGREDIENTES)
     {
         printf("Limite de ingredientes atingido.\n");
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
     Ingrediente novoIngrediente;
-    novoIngrediente.id = *numIngredientes + 1; // ID auto-incremental
+    novoIngrediente.id = *numIngredientes + 1; // ID incremental
     printf("Nome do ingrediente: ");
 
     getchar();
     fgets(novoIngrediente.nome, 100, stdin);
+
+    int tamanho = strlen(novoIngrediente.nome); // Só removendo o \n, mais pra formatação mesmo
+    if (tamanho > 0 && novoIngrediente.nome[tamanho - 1] == '\n')
+    {
+        novoIngrediente.nome[tamanho - 1] = '\0';
+    }
+
     printf("Preco: ");
     scanf("%f", &novoIngrediente.preco);
     ingredientes[*numIngredientes] = novoIngrediente;
     (*numIngredientes)++;
     printf("Ingrediente adicionado com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para visualizar todos os ingredientes
@@ -29,6 +44,10 @@ void visualizarIngredientes(Ingrediente *ingredientes, int numIngredientes)
     if (numIngredientes == 0)
     {
         printf("Nenhum ingrediente cadastrado.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
     for (int i = 0; i < numIngredientes; i++)
@@ -47,6 +66,10 @@ void editarIngrediente(Ingrediente *ingredientes, int numIngredientes)
     if (id < 1 || id > numIngredientes)
     {
         printf("Ingrediente nao encontrado.\n");
+
+        system("PAUSE");
+        system("CLS");
+
         return;
     }
 
@@ -58,6 +81,9 @@ void editarIngrediente(Ingrediente *ingredientes, int numIngredientes)
     printf("Novo preco do ingrediente (atual: %.2f): ", ingrediente->preco);
     scanf("%f", &ingrediente->preco);
     printf("Ingrediente editado com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para remover um ingrediente
@@ -80,6 +106,9 @@ void removerIngrediente(Ingrediente *ingredientes, int *numIngredientes)
     }
     (*numIngredientes)--; // Decrementa o número de ingredientes
     printf("Ingrediente removido com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para exportar ingredientes para um arquivo
@@ -97,6 +126,9 @@ void exportarIngredientes(Ingrediente *ingredientes, int numIngredientes)
     }
     fclose(file);
     printf("Ingredientes exportados com sucesso!\n");
+
+    system("PAUSE");
+    system("CLS");
 }
 
 // Função para importar ingredientes de um arquivo
@@ -135,4 +167,7 @@ void importarIngredientes(Ingrediente *ingredientes, int *numIngredientes)
     {
         printf("Ingredientes importados com sucesso!\n");
     }
+
+    system("PAUSE");
+    system("CLS");
 }
