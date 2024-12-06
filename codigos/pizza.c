@@ -152,20 +152,35 @@ void importarPizzas(Pizza *pizzas, int *numPizzas)
         printf("Erro ao abrir o arquivo para importacao.\n");
         return;
     }
-    while (fscanf(file, "%d %s %c %f %d", &pizzas[*numPizzas].id, pizzas[*numPizzas].nome, &pizzas[*numPizzas].tamanho, &pizzas[*numPizzas].preco, &pizzas[*numPizzas].num_ingredientes) != EOF)
+
+    while (*numPizzas < MAX_PIZZAS)
     {
+        // Leitura dos dados principais da pizza
+        if (fscanf(file, "%d %c %f %d",
+                   &pizzas[*numPizzas].id,
+                   &pizzas[*numPizzas].tamanho,
+                   &pizzas[*numPizzas].preco,
+                   &pizzas[*numPizzas].num_ingredientes) != 4)
+        {
+            break; // Sai do loop se a leitura falhar
+        }
+
+        // Limpar o buffer e ler o nome da pizza
+        fgetc(file); // Consome o '\n' que sobrou
+        fgets(pizzas[*numPizzas].nome, 100, file);
+        pizzas[*numPizzas].nome[strcspn(pizzas[*numPizzas].nome, "\n")] = '\0'; // Remove '\n'
+
+        // Leitura dos ingredientes
         for (int j = 0; j < pizzas[*numPizzas].num_ingredientes; j++)
         {
-            fscanf(file, "%s %f", pizzas[*numPizzas].ingredientes[j].nome, &pizzas[*numPizzas].ingredientes[j].preco);
-            pizzas[*numPizzas].ingredientes[j].id = j + 1; // ID auto-incremental para ingredientes
+            fscanf(file, "%s %f", pizzas[*numPizzas].ingredientes[j].nome,
+                   &pizzas[*numPizzas].ingredientes[j].preco);
+            pizzas[*numPizzas].ingredientes[j].id = j + 1;
         }
+
         (*numPizzas)++;
-        if (*numPizzas >= MAX_PIZZAS)
-        {
-            printf("Limite de pizzas atingido durante a importacao.\n");
-            break;
-        }
     }
+
     fclose(file);
     printf("Pizzas importadas com sucesso!\n");
 }
