@@ -8,11 +8,11 @@ int main()
     Pizza pizzas[MAX_PIZZAS];
     Ingrediente ingredientes[MAX_INGREDIENTES];
     int numPizzas = 0, numIngredientes = 0;
-    int opcao, subOpcao;
+    int opcao = 0, subOpcao = 0;
 
     do
     {
-        printf("\n=== Sistema de Gerenciamento de Pizzaria ===\n");
+        printf("\n=== Sistema de Gerenciamento Pizzaria Joao Fortao ===\n");
         printf("1. Gerenciar Pizzas\n");
         printf("2. Gerenciar Ingredientes\n");
         printf("3. Vender Pizza\n");
@@ -39,6 +39,8 @@ int main()
                 printf("0. Voltar\n");
                 printf("Escolha uma opcao: ");
                 scanf("%d", &subOpcao);
+
+                system("CLS");
 
                 switch (subOpcao)
                 {
@@ -84,6 +86,8 @@ int main()
                 printf("Escolha uma opcao: ");
                 scanf("%d", &subOpcao);
 
+                system("CLS");
+
                 switch (subOpcao)
                 {
                 case 1:
@@ -119,7 +123,7 @@ int main()
         case 3: // Vender Pizza
             system("CLS");
 
-            printf("Funcionalidade de venda de pizza ainda nao implementada.\n");
+            // Ainda falta implementar
             break;
 
         case 4: // Exportar Pizzas
@@ -131,7 +135,7 @@ int main()
         case 5: // Importar Pizzas
             system("CLS");
 
-            importarPizzas(pizzas, &numPizzas);
+            importarPizzas(pizzas, &numPizzas); // ERRO DE LEITURA - NAO SEI OQ É
             break;
 
         case 6: // Exportar Ingredientes
@@ -143,7 +147,7 @@ int main()
         case 7: // Importar Ingredientes
             system("CLS");
 
-            importarIngredientes(ingredientes, &numIngredientes);
+            importarIngredientes(ingredientes, &numIngredientes); // ERRO DE LEITURA - NAO SEI OQ É
             break;
 
         case 0: // Sair
