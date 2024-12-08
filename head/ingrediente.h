@@ -4,7 +4,7 @@
 #define MAX_INGREDIENTES 50
 #define MAX_NOME 100
 
-// Estrutura para ingredientes
+// Struct para ingredientes
 typedef struct
 {
     int id;

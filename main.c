@@ -22,7 +22,7 @@ int main()
     int opcao;
     do
     {
-        // Exibir menu principal
+        // Exibe o menu principal
         printf("Menu Principal:\n");
         printf("1. Gerenciador de Pizzas\n");
         printf("2. Gerenciador de Ingredientes\n");
@@ -136,20 +136,20 @@ int main()
                 break;
             }
 
-            // Exibe os detalhes da pizza selecionada
+            //Confrima a venda
             printf("Venda confirmada:\n");
             printf("Pizza: %s\n", pizzaVendida->nome);
             printf("Preco base: R$ %.2f\n", pizzaVendida->preco);
             printf("Ingredientes:\n");
             for (int i = 0; i < MAX_INGREDIENTES_PIZZA; i++)
             {
-                if (pizzaVendida->ingredientes[i].id != 0) // Verifica se o ingrediente é válido
+                if (pizzaVendida->ingredientes[i].id != 0) // Verifica se o ingrediente existe
                 {
                     printf("  - %s (R$ %.2f)\n", pizzaVendida->ingredientes[i].nome, pizzaVendida->ingredientes[i].preco);
                 }
             }
 
-            // Pergunta se o usuário quer adicionar ingredientes extras
+            // Pergunta se quer adicionar ingredientes a mais
             printf("\nDeseja adicionar ingredientes extras? (1 - Sim / 0 - Não): ");
             int adicionarExtras;
             scanf("%d", &adicionarExtras);
@@ -217,7 +217,7 @@ int main()
         }
     } while (opcao != 0);
 
-    // Exportar ingredientes e pizzas ao fechar o programa
+    // Exportar ingredientes e pizzas ao fechar o programa | EU TO SURTANDO COM ESSA BOMBA AQUI JA VTNC, BGLH N FUNCIONA NEM POR UM KRLH
 
     printf("\n");
     exportarIngredientes(ingredientes, numIngredientes, FILENAME_INGREDIENTES);

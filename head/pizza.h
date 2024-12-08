@@ -6,7 +6,7 @@
 
 #include "../head/ingrediente.h"
 
-// Estrutura para pizzas
+// Struct para pizzas
 typedef struct
 {
     int id;

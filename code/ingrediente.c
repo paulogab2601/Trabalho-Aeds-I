@@ -32,7 +32,7 @@ void adicionarIngrediente(Ingrediente *ingredientes, int *numIngredientes)
     system("CLS");
 }
 
-// Função para visualizar ingredientes
+// Funçao para visualizar ingredietes
 void visualizarIngredientes(Ingrediente *ingredientes, int numIngredientes)
 {
     if (numIngredientes == 0)
@@ -56,7 +56,7 @@ void visualizarIngredientes(Ingrediente *ingredientes, int numIngredientes)
     system("CLS");
 }
 
-// Função para editar um ingrediente
+// Funcaoo para editar um ingrediente
 void editarIngrediente(Ingrediente *ingredientes, int numIngredientes)
 {
     int id;
@@ -106,7 +106,7 @@ void removerIngrediente(Ingrediente *ingredientes, int *numIngredientes)
     system("CLS");
 }
 
-// Função para exportar ingredientes para um arquivo
+// Função para exportar ingredientes pro arquivo
 void exportarIngredientes(Ingrediente *ingredientes, int numIngredientes, const char *filename)
 {
     FILE *file = fopen(filename, "w");
@@ -129,7 +129,7 @@ void exportarIngredientes(Ingrediente *ingredientes, int numIngredientes, const 
     printf("Ingredientes exportados com sucesso para %s!\n", filename);
 }
 
-// Função para importar ingredientes de um arquivo
+// Função para importar ingredientes do arquivo
 void importarIngredientes(Ingrediente *ingredientes, int *numIngredientes, const char *filename)
 {
     FILE *file = fopen(filename, "r");

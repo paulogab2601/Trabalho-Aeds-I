@@ -18,7 +18,7 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas, Ingrediente *ingredientes, in
     }
 
     Pizza novaPizza;
-    novaPizza.id = *numPizzas + 1; // ID simples baseado na contagem
+    novaPizza.id = *numPizzas + 1; // ID simples baseado no num de pizzas
 
     printf("Digite o nome da pizza: ");
     scanf(" %[^\n]", novaPizza.nome);
@@ -26,7 +26,7 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas, Ingrediente *ingredientes, in
     printf("Digite o preco da pizza: ");
     scanf("%f", &novaPizza.preco);
 
-    // Exibe os ingredientes disponíveis e permite selecioná-los
+    // Mostra os ingredientes disponíveis e seleciona
     printf("Ingredientes disponiveis:\n");
     for (int i = 0; i < *numIngredientes; i++)
     {
@@ -49,10 +49,10 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas, Ingrediente *ingredientes, in
         }
     }
 
-    // Atualiza o número de ingredientes selecionados
+    // Atualiza o num de ingredientes selecionados
     for (int i = numIngredientesSelecionados; i < MAX_INGREDIENTES_PIZZA; i++)
     {
-        novaPizza.ingredientes[i].id = 0; // Zera os ingredientes não utilizados
+        novaPizza.ingredientes[i].id = 0; // Zera os ingredientes não utilizados // Mó B.o mas corrigi (Eu sou o novo Elon Musk, ctz)
     }
 
     pizzas[*numPizzas] = novaPizza;
@@ -63,7 +63,7 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas, Ingrediente *ingredientes, in
     system("CLS");
 }
 
-// Função para visualizar pizzas
+// Funcão para visualizar pizzs
 void visualizarPizzas(Pizza *pizzas, int numPizzas)
 {
     if (numPizzas == 0)
@@ -80,10 +80,10 @@ void visualizarPizzas(Pizza *pizzas, int numPizzas)
         printf("ID: %d, Nome: %s, Preco: %.2f\n", pizzas[i].id, pizzas[i].nome, pizzas[i].preco);
         printf("Ingredientes:\n");
 
-        // Loop apenas nos ingredientes válidos
+        // Loop apenas nos ingredientes validos
         for (int j = 0; j < MAX_INGREDIENTES_PIZZA; j++)
         {
-            if (pizzas[i].ingredientes[j].id > 0) // Ingredientes com ID > 0 são válidos
+            if (pizzas[i].ingredientes[j].id > 0) // Ingredientes com ID menor 0 são válidos
             {
                 printf("  - %s (R$ %.2f)\n", pizzas[i].ingredientes[j].nome, pizzas[i].ingredientes[j].preco);
             }
@@ -120,7 +120,7 @@ void editarPizza(Pizza *pizzas, int numPizzas, Ingrediente *ingredientes, int *n
     printf("Novo preco: ");
     scanf("%f", &pizza->preco);
 
-    // Exibe os ingredientes disponíveis e permite selecioná-los
+    // Exibe os ingredientes disponíveis e permite selecioná-los | Problema com ID corrigido (problema tava na inicialização do ID)
     printf("Ingredientes disponiveis:\n");
     for (int i = 0; i < *numIngredientes; i++)
     {
@@ -143,7 +143,7 @@ void editarPizza(Pizza *pizzas, int numPizzas, Ingrediente *ingredientes, int *n
         }
     }
 
-    // Atualiza o número de ingredientes selecionados
+    // Atualiza o numero de ingredientes selecionados
     for (int i = numIngredientesSelecionados; i < MAX_INGREDIENTES_PIZZA; i++)
     {
         pizza->ingredientes[i].id = 0; // Zera os ingredientes não utilizados
@@ -155,7 +155,7 @@ void editarPizza(Pizza *pizzas, int numPizzas, Ingrediente *ingredientes, int *n
     system("CLS");
 }
 
-// Função para remover uma pizza
+// Função para remover uma piza
 void removerPizza(Pizza *pizzas, int *numPizzas)
 {
     int id;
@@ -182,7 +182,7 @@ void removerPizza(Pizza *pizzas, int *numPizzas)
     system("CLS");
 }
 
-// Função para exportar pizzas para um arquivo
+// Funçao para exportar pizzas para um arquivo txt 
 void exportarPizzas(Pizza *pizzas, int numPizzas, const char *filename)
 {
     FILE *file = fopen(filename, "w");
@@ -196,13 +196,13 @@ void exportarPizzas(Pizza *pizzas, int numPizzas, const char *filename)
 
     for (int i = 0; i < numPizzas; i++)
     {
-        // Exportar informações da pizza
+        // Exportar informaçoes da pizza
         fprintf(file, "%d;%s;%.2f;", pizzas[i].id, pizzas[i].nome, pizzas[i].preco);
 
         // Exportar os ingredientes da pizza
         for (int j = 0; j < MAX_INGREDIENTES_PIZZA; j++)
         {
-            if (pizzas[i].ingredientes[j].id != 0) // Verifica se o ingrediente é válido
+            if (pizzas[i].ingredientes[j].id != 0) // Verifica se os ingrediente é válido
             {
                 fprintf(file, "%d;%s;%.2f;",
                         pizzas[i].ingredientes[j].id,
@@ -211,7 +211,7 @@ void exportarPizzas(Pizza *pizzas, int numPizzas, const char *filename)
             }
         }
 
-        // Finalizar a linha para esta pizza
+        // Finaliza a linha da pizza
         fprintf(file, "\n");
     }
 
@@ -222,7 +222,7 @@ void exportarPizzas(Pizza *pizzas, int numPizzas, const char *filename)
     system("CLS");
 }
 
-void importarPizzas(Pizza *pizzas, int *numPizzas, const char *filename)
+void importarPizzas(Pizza *pizzas, int *numPizzas, const char *filename) //Corrigida
 {
     FILE *file = fopen(filename, "r");
     if (!file)
@@ -234,14 +234,14 @@ void importarPizzas(Pizza *pizzas, int *numPizzas, const char *filename)
     }
 
     char linha[512];
-    while (*numPizzas < 50 && fgets(linha, sizeof(linha), file)) // Corrige a lógica de leitura
+    while (*numPizzas < 50 && fgets(linha, sizeof(linha), file)) 
     {
         Pizza novaPizza;
         novaPizza.id = 0;
         novaPizza.preco = 0.0f;
         memset(novaPizza.ingredientes, 0, sizeof(novaPizza.ingredientes)); // Zera os ingredientes
 
-        // Lê os dados da pizza (ID, nome, preço)
+        // Le os dados da pizza (ID, nome, preço e tudo mais)
         char *token = strtok(linha, ";");
         if (token != NULL)
             novaPizza.id = atoi(token);
@@ -254,7 +254,7 @@ void importarPizzas(Pizza *pizzas, int *numPizzas, const char *filename)
         if (token != NULL)
             novaPizza.preco = atof(token);
 
-        // Lê os ingredientes
+        // Le os ingredientes
         int numIngredientesLidos = 0;
         while ((token = strtok(NULL, ";")) != NULL && numIngredientesLidos < MAX_INGREDIENTES_PIZZA)
         {
@@ -272,7 +272,7 @@ void importarPizzas(Pizza *pizzas, int *numPizzas, const char *filename)
             novaPizza.ingredientes[numIngredientesLidos++] = novoIngrediente;
         }
 
-        pizzas[*numPizzas] = novaPizza; // Adiciona a pizza ao array
+        pizzas[*numPizzas] = novaPizza; // Adiciona a pizza ao array de pizzas
         (*numPizzas)++;
     }
 
