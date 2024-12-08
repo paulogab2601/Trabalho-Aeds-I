@@ -17,8 +17,6 @@ void adicionarPizza(Pizza *pizzas, int *numPizzas)
 
     getchar();
     fgets(novaPizza.nome, 100, stdin);
-    printf("Tamanho (P, M, G): ");
-    scanf(" %c", &novaPizza.tamanho);
     printf("Preco: ");
     scanf("%f", &novaPizza.preco);
 
@@ -52,7 +50,7 @@ void visualizarPizzas(Pizza *pizzas, int numPizzas)
     }
     for (int i = 0; i < numPizzas; i++)
     {
-        printf("ID: %d, Nome: %s, Tamanho: %c, Preco: %.2f\n", pizzas[i].id, pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco);
+        printf("ID: %d, Nome: %s, Preco: %.2f\n", pizzas[i].id, pizzas[i].nome, pizzas[i].preco);
         printf("Ingredientes:\n");
         for (int j = 0; j < pizzas[i].num_ingredientes; j++)
         {
@@ -79,8 +77,6 @@ void editarPizza(Pizza *pizzas, int numPizzas)
 
     getchar();
     fgets(pizza->nome, 100, stdin);
-    printf("Novo tamanho da pizza (atual: %c): ", pizza->tamanho);
-    scanf(" %c", &pizza->tamanho);
     printf("Novo preco da pizza (atual: %.2f): ", pizza->preco);
     scanf("%f", &pizza->preco);
 
@@ -133,7 +129,7 @@ void exportarPizzas(Pizza *pizzas, int numPizzas)
     }
     for (int i = 0; i < numPizzas; i++)
     {
-        fprintf(file, "%d %s %c %.2f %d\n", pizzas[i].id, pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco, pizzas[i].num_ingredientes);
+        fprintf(file, "%d %s %.2f %d\n", pizzas[i].id, pizzas[i].nome, pizzas[i].preco, pizzas[i].num_ingredientes);
         for (int j = 0; j < pizzas[i].num_ingredientes; j++)
         {
             fprintf(file, "%s %.2f\n", pizzas[i].ingredientes[j].nome, pizzas[i].ingredientes[j].preco);
@@ -156,9 +152,8 @@ void importarPizzas(Pizza *pizzas, int *numPizzas)
     while (*numPizzas < MAX_PIZZAS)
     {
         // Leitura dos dados principais da pizza
-        if (fscanf(file, "%d %c %f %d",
+        if (fscanf(file, "%d %f %d",
                    &pizzas[*numPizzas].id,
-                   &pizzas[*numPizzas].tamanho,
                    &pizzas[*numPizzas].preco,
                    &pizzas[*numPizzas].num_ingredientes) != 4)
         {
